@@ -1,4 +1,4 @@
-package com.kafka.example.kafka_demo.com.kafka.example.exception;
+package com.kafka.demo.exception;
 
 public class SystemException extends RuntimeException {
 

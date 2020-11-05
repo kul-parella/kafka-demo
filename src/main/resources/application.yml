@@ -7,3 +7,36 @@ spring:
       bootstrap-servers: 127.0.0.1:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+spring.demo.kafka:
+
+  bootstrapServersConfig: 127.0.0.1:9092
+  consumerGroupName: kafka_sample_group
+  enableListeners: true
+  keySerializerClassConfig: org.apache.kafka.common.serialization.StringSerializer
+  keyDeserializerClassConfig: org.apache.kafka.common.serialization.StringDeserializer
+  valueDeserializerClassConfig: org.springframework.kafka.support.serializer.JsonSerializer
+  nonRecoverableTopicName: kafka-sample_nonRecoverable
+  finalErrorTopicName: kafka-sample_final
+
+  topics:
+    originalTopic:
+      topicName: kafka-sample
+      nextTopicName: kafka-sample_delay1
+      maxConsumers: 5
+    delayTopic1:
+      topicName: kafka-sample_delay1
+      nextTopicName: kafka-sample_delay2
+      maxconsumers: 5
+      retryPolicy:
+        retryDelay: 10
+        maxRetryCount: 3
+    delayTopic2:
+      topicName: kafka-sample_delay2
+      nextTopicName: kafka-sample_delay2
+      maxConsumers: 5
+      retryPolicy:
+        retryDelay: 5
+        maxRetrycount: 3
+
